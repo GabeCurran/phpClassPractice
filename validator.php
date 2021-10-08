@@ -2,25 +2,18 @@
 class createUser {
 
     function __construct($username, $email, $password, $confirmPassword) {
-        $validatorArr = [$username, $email, $password, $confirmPassword];
-
-        function validateCredentials($validatorArr) {
-            $username = $validatorArr[0];
-            $validEmail = $validatorArr[1];
-            $password = $validatorArr[2];
-            $confirmPassword = $validatorArr[3];
-
-            $usernameValid = false;
-            $passwordValid = false;
-            $passwordChecks = 0;
-            $passwordConstraints = '/^.*(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).*$/';
-    
+        function validateUsername($username) {
             if(strlen($username) >= 6) {
-                $usernameValid = true;
+                return $username;
             } else {
                 echo '<br>Your username needs to be at least 6 characters.';
             }
-    
+        }
+
+        function validatePassword($password, $confirmPassword) {
+            $passwordChecks = 0;
+            $passwordConstraints = '/^.*(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).*$/';
+
             if(strlen($password) >= 6) {
                 $passwordChecks++;
             } else {
@@ -39,19 +32,17 @@ class createUser {
                 echo '<br>Your password must contain at least one uppercase letter, one lowercase letter, and a digit.';
             }
     
-            if($passwordChecks = 3) {
-                $passwordValid = true;
+            if($passwordChecks == 3) {
+                return $password;
+            } else {
+                echo '<br>Something went wrong with the password...';
             }
-    
-            if($usernameValid == true && $passwordValid == true) {
-                $validatedArr = [$username, $password];
-                return $validatedArr;
-            }
+
         }
 
-        $this->username = validateCredentials($validatorArr)[0];
-        $this->email = validateCredentials($validatorArr[1]);
-        $this->password = validateCredentials($validatorArr[2]);
+        $this->username = validateUsername($username);
+        $this->email = $email;
+        $this->password = validatePassword($password, $confirmPassword);
     }
 
     function get_username() {
