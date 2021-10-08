@@ -18,25 +18,25 @@ class createUser {
             if(strlen($username) >= 6) {
                 $usernameValid = true;
             } else {
-                echo 'Your username needs to be at least 6 characters.';
+                echo '<br>Your username needs to be at least 6 characters.';
             }
     
             if(strlen($password) >= 6) {
                 $passwordChecks++;
             } else {
-                echo 'Your password needs to be at least 6 characters.';
+                echo '<br>Your password needs to be at least 6 characters.';
             }
     
             if($password == $confirmPassword) {
                 $passwordChecks++;
             } else {
-                echo "Your password and confirm password don't match!";
+                echo "<br>Your password and confirm password don't match!";
             }
     
             if(preg_match($passwordConstraints, $password)) {
                 $passwordChecks++;
             } else {
-                echo 'Your password must contain at least one uppercase letter, one lowercase letter, and a digit.';
+                echo '<br>Your password must contain at least one uppercase letter, one lowercase letter, and a digit.';
             }
     
             if($passwordChecks = 3) {
@@ -59,24 +59,17 @@ class createUser {
     }
 };
 
-if (isset($_POST['submitForm'])) {
-        if
-                /* Check for empty values and prevent injection */
-                (htmlspecialchars($_POST['password']) == htmlspecialchars($_POST['confirmPassword']) &&
-                !empty(htmlspecialchars($_POST['username'])) && 
-                !empty(htmlspecialchars($_POST['email'])) && 
-                !empty(htmlspecialchars($_POST['password'])) && 
-                !empty(htmlspecialchars($_POST['confirmPassword'])) && 
-
-                /* Check for whitespace */
-                !ctype_space(htmlspecialchars($_POST['username'])) && 
-                !ctype_space(htmlspecialchars($_POST['email'])) && 
-                !ctype_space(htmlspecialchars($_POST['password'])) && 
-                !ctype_space(htmlspecialchars($_POST['confirmPassword'])))
-
-                {
-                    $user = new createUser(htmlspecialchars($_POST['username']), htmlspecialchars($_POST['email']), htmlspecialchars($_POST['password']), htmlspecialchars($_POST['confirmPassword']));
-                    echo 'your username is "'.$user->get_username().'".';
-                };
+if (isset($_POST['username']) &&
+    !empty($_POST['username']) && 
+    isset($_POST['email']) &&
+    !empty($_POST['email']) && 
+    isset($_POST['password']) &&
+    !empty($_POST['password']) && 
+    isset($_POST['confirmPassword']) &&
+    !empty($_POST['confirmPassword'])) {
+        $user = new createUser(htmlspecialchars($_POST['username']), htmlspecialchars($_POST['email']), htmlspecialchars($_POST['password']), htmlspecialchars($_POST['confirmPassword']));
+        echo '<br>your username is "'.$user->get_username().'".';
+} else {
+    header('Location: index.php?error=1');
 };
 ?>
