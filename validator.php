@@ -6,7 +6,8 @@ class createUser {
             if(strlen($username) >= 6) {
                 return $username;
             } else {
-                echo '<br>Your username needs to be at least 6 characters.';
+                header('Location: index.php?error=2');
+                exit;
             }
         }
 
@@ -17,25 +18,29 @@ class createUser {
             if(strlen($password) >= 6) {
                 $passwordChecks++;
             } else {
-                echo '<br>Your password needs to be at least 6 characters.';
+                header('Location: index.php?error=3');
+                exit;
             }
     
             if($password == $confirmPassword) {
                 $passwordChecks++;
             } else {
-                echo "<br>Your password and confirm password don't match!";
+                header('Location: index.php?error=4');
+                exit;
             }
     
             if(preg_match($passwordConstraints, $password)) {
                 $passwordChecks++;
             } else {
-                echo '<br>Your password must contain at least one uppercase letter, one lowercase letter, and a digit.';
+                header('Location: index.php?error=5');
+                exit;
             }
     
             if($passwordChecks == 3) {
                 return $password;
             } else {
-                echo '<br>Something went wrong with the password...';
+                header('Location: index.php?error=6');
+                exit;
             }
 
         }
@@ -62,5 +67,6 @@ if (isset($_POST['username']) &&
         echo '<br>your username is "'.$user->get_username().'".';
 } else {
     header('Location: index.php?error=1');
+    exit;
 };
 ?>
