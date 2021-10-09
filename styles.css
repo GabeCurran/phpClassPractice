@@ -1,8 +1,17 @@
+* {
+    font-size: 1.1rem;
+    font-family: 'Unispace';
+}
+
 form {
     display: flex;
     flex-direction: column;
 }
 
 input {
-    max-width: 150px;
+    max-width: 300px;
+}
+
+div {
+    margin-bottom: 10px;
 }

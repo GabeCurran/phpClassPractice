@@ -1,4 +1,5 @@
 <?php
+session_start();
 class createUser {
 
     function __construct($username, $email, $password, $confirmPassword) {
@@ -54,6 +55,11 @@ class createUser {
         return $this->username;
     }
 };
+
+$_SESSION['username'] = $_POST['username'];
+$_SESSION['email'] = $_POST['email'];
+$_SESSION['password'] = $_POST['password'];
+$_SESSION['confirmPassword'] = $_POST['confirmPassword'];
 
 if (isset($_POST['username']) &&
     !empty($_POST['username']) && 

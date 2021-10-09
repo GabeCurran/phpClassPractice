@@ -11,23 +11,23 @@
     <form action='validator.php' method='post'>
         <div id='usernameDiv'>
             <label for='username'>Username</label>
-            <input type='text' id='username' name='username' placeholder='Enter Username'>
+            <input value='<?php echo $_SESSION["username"] ?>' type='text' id='username' name='username' placeholder='Enter Username'>
         </div>
 
         <div id='emailDiv'>
             <label for='email'>Email</label>
-            <input type='email' id='email' name='email' placeholder='Email Address'>
+            <input value='<?php echo $_SESSION["email"] ?>' type='email' id='email' name='email' placeholder='Email Address'>
         </div>
 
         <div id='passwordDiv'>
             <label for='password'>Password</label>
-            <input type='password' id='password' name='password' placeholder='Enter Password'>
+            <input value='<?php echo $_SESSION["password"] ?>' type='password' id='password' name='password' placeholder='Enter Password'>
             <input type="checkbox" onclick="showPassword()">
         </div>
 
         <div id='confirmPasswordDiv'>
             <label for='confirmPassword'>Confirm Password</label>
-            <input type='password' id='confirmPassword' name='confirmPassword' placeholder='Confirm Password'>
+            <input value='<?php echo $_SESSION["confirmPassword"] ?>' type='password' id='confirmPassword' name='confirmPassword' placeholder='Confirm Password'>
             <input type="checkbox" onclick="showConfirmPassword()">
         </div>
 
